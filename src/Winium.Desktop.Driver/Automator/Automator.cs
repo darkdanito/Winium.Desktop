@@ -21,8 +21,9 @@
 
         #region Constructors and Destructors
 
-        public Automator()
+        public Automator(string session)
         {
+            this.Session = session;
             this.ElementsRegistry = new ElementsRegistry();
         }
 
@@ -36,7 +37,7 @@
 
         public ElementsRegistry ElementsRegistry { get; private set; }
 
-        public string Session { get; set; }
+        public string Session { get; private set; }
 
         public WiniumKeyboard WiniumKeyboard { get; set; }
 
@@ -60,8 +61,13 @@
                 {
                     if (instance == null)
                     {
+                        if (sessionId == null)
+                        {
+                            sessionId = "AwesomeSession";
+                        }
+
                         // TODO: Add actual support for sessions. Temporary return single Automator for any season
-                        instance = new Automator();
+                        instance = new Automator(sessionId);
                     }
                 }
             }
